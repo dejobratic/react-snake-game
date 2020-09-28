@@ -1,12 +1,13 @@
 import React, { useContext } from "react"
 
-import { GameContext } from "components/Game"
-import { CANVAS_SIZE } from "utils/game-constants"
+import { GameContext } from "contexts/GameContext"
+import { SettingsContext } from "contexts/SettingsContext"
 
 import useCanvas from "hooks/useCanvas"
 
 const Level = () => {
   const { snake, apple } = useContext(GameContext)
+  const { LEVEL_SIZE } = useContext(SettingsContext)
 
   const drawSnake = (context, snake) => {
     context.fillStyle = "lightgreen"
@@ -30,8 +31,8 @@ const Level = () => {
     <>
       <canvas
         ref={canvasRef}
-        width={`${CANVAS_SIZE[0]}px`}
-        height={`${CANVAS_SIZE[1]}px`}
+        width={`${LEVEL_SIZE[0]}px`}
+        height={`${LEVEL_SIZE[1]}px`}
       />
     </>
   )

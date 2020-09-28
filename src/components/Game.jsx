@@ -1,22 +1,28 @@
-import React, { useState, createContext } from "react"
+import React, { useState, useContext } from "react"
 
 import Level from "components/Level"
 
+import { GameContext } from "contexts/GameContext"
+import { SettingsContext } from "contexts/SettingsContext"
+
 import useInterval from "hooks/useInterval"
 
-import {
-  CANVAS_SIZE,
-  SNAKE_START,
-  APPLE_START,
-  SCALE,
-  SPEED,
-  DIRECTIONS,
-} from "utils/game-constants"
-
-export const GameContext = createContext({})
+const SNAKE_START = [
+  [8, 10],
+  [8, 11],
+]
+const APPLE_START = [8, 3]
+const DIRECTION_START = [0, -1]
+const DIRECTIONS = {
+  38: [0, -1], // up
+  40: [0, 1], // down
+  37: [-1, 0], // left
+  39: [1, 0], // right
+}
+const GAME_SPEED = 100
 
 const Game = () => {
-  const DIRECTION_START = [0, -1]
+  const { LEVEL_SIZE, LEVEL_SCALE } = useContext(SettingsContext)
 
   const [snake, setSnake] = useState(SNAKE_START)
   const [apple, setApple] = useState(APPLE_START)
@@ -28,7 +34,7 @@ const Game = () => {
     setSnake(SNAKE_START)
     setApple(APPLE_START)
     setDirection(DIRECTION_START)
-    setSpeed(SPEED)
+    setSpeed(GAME_SPEED)
     setGameOver(false)
   }
 
@@ -42,22 +48,25 @@ const Game = () => {
   }
 
   const createApple = (currentSnake) => {
-    let newApple = apple.map((_, i) =>
-      Math.floor((Math.random() * CANVAS_SIZE[i]) / SCALE)
-    )
-
-    while (hasCollidedWithSnakeBody(newApple, currentSnake)) {
-      newApple = createApple()
+    const placeAppleOnRandomBlock = () => {
+      return apple.map((_, i) =>
+        Math.floor((Math.random() * LEVEL_SIZE[i]) / LEVEL_SCALE)
+      )
     }
+
+    let newApple = null
+    do {
+      newApple = placeAppleOnRandomBlock()
+    } while (hasCollidedWithSnakeBody(newApple, currentSnake))
 
     return newApple
   }
 
   const hasCollidedWithWall = (block) => {
     return (
-      block[0] * SCALE >= CANVAS_SIZE[0] ||
+      block[0] * LEVEL_SCALE >= LEVEL_SIZE[0] ||
       block[0] < 0 ||
-      block[1] * SCALE >= CANVAS_SIZE[1] ||
+      block[1] * LEVEL_SCALE >= LEVEL_SIZE[1] ||
       block[1] < 0
     )
   }
