@@ -2,7 +2,6 @@ import React, { useState, useContext } from "react"
 
 import Level from "components/Level"
 
-import { GameContext } from "contexts/GameContext"
 import { SettingsContext } from "contexts/SettingsContext"
 
 import useInterval from "hooks/useInterval"
@@ -111,13 +110,11 @@ const Game = () => {
   useInterval(() => run(), speed)
 
   return (
-    <GameContext.Provider value={{ snake, apple }}>
-      <div role="button" tabIndex="0" onKeyDown={changeSnakeDirection}>
-        <Level />
-        {gameOver && <div>GAME OVER!</div>}
-        <button onClick={startGame}>Start Game</button>
-      </div>
-    </GameContext.Provider>
+    <div role="button" tabIndex="0" onKeyDown={changeSnakeDirection}>
+      <Level snake={snake} apple={apple} />
+      {gameOver && <div>GAME OVER!</div>}
+      <button onClick={startGame}>Start Game</button>
+    </div>
   )
 }
 
