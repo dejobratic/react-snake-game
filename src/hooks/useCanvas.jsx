@@ -1,17 +1,14 @@
-import { useRef, useEffect, useContext } from "react"
+import { useRef, useEffect } from "react"
 
-import { SettingsContext } from "contexts/SettingsContext"
-
-const useCanvas = (callback) => {
+const useCanvas = (canvasSize, canvasTileSize, callback) => {
   const canvasRef = useRef()
-  const { LEVEL_SIZE, LEVEL_SCALE } = useContext(SettingsContext)
 
   useEffect(() => {
     const context = canvasRef.current.getContext("2d")
-    context.setTransform(LEVEL_SCALE, 0, 0, LEVEL_SCALE, 0, 0)
-    context.clearRect(0, 0, LEVEL_SIZE[0], LEVEL_SIZE[1])
+    context.setTransform(canvasTileSize, 0, 0, canvasTileSize, 0, 0)
+    context.clearRect(0, 0, canvasSize[0], canvasSize[1])
     callback(context)
-  }, [callback, LEVEL_SIZE, LEVEL_SCALE])
+  }, [canvasSize, canvasTileSize, callback])
 
   return canvasRef
 }

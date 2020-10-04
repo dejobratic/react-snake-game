@@ -1,0 +1,20 @@
+.App {
+  text-align: center;
+}
+
+.game-container {
+  display: flex-start;
+  flex-direction: column;
+  background-color: #70483c;
+  
+  .game-message {
+    position: absolute;
+    left: 230px;
+    top: 300px;
+  }
+}
+
+canvas {
+  margin: 10px;
+  background-image: url("assets/level-background.jpg");
+}

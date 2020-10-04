@@ -6,50 +6,71 @@ import { SettingsContext } from "contexts/SettingsContext"
 
 import useInterval from "hooks/useInterval"
 
-const SNAKE_START = [
-  [8, 10],
-  [8, 11],
-]
-const APPLE_START = [8, 3]
-const DIRECTION_START = [0, -1]
 const DIRECTIONS = {
   38: [0, -1], // up
   40: [0, 1], // down
   37: [-1, 0], // left
   39: [1, 0], // right
 }
+
+const SNAKE_START = [
+  [8, 10],
+  [8, 11],
+]
+const APPLE_START = [8, 3]
+const DIRECTION_START = DIRECTIONS[38]
+
 const GAME_SPEED = 100
 
 const Game = () => {
-  const { LEVEL_SIZE, LEVEL_SCALE } = useContext(SettingsContext)
+  const { levelSettings } = useContext(SettingsContext)
 
   const [snake, setSnake] = useState(SNAKE_START)
   const [apple, setApple] = useState(APPLE_START)
   const [direction, setDirection] = useState(DIRECTION_START)
   const [speed, setSpeed] = useState(null)
-  const [gameOver, setGameOver] = useState(false)
+  const [gameStarted, setGameStarted] = useState(false)
 
   const startGame = () => {
     setSnake(SNAKE_START)
     setApple(APPLE_START)
     setDirection(DIRECTION_START)
     setSpeed(GAME_SPEED)
-    setGameOver(false)
+    setGameStarted(true)
   }
 
   const endGame = () => {
     setSpeed(null)
-    setGameOver(true)
+    setGameStarted(false)
   }
 
-  const changeSnakeDirection = ({ keyCode }) => {
-    keyCode >= 37 && keyCode <= 40 && setDirection(DIRECTIONS[keyCode])
+  const handleKeyPress = ({ keyCode }) => {
+    if (gameStarted) {
+      handleChangeSnakeDirection({ keyCode })
+    } else {
+      startGame()
+    }
+  }
+
+  const handleChangeSnakeDirection = ({ keyCode }) => {
+    // prevent movement with unallowed keys
+    if (keyCode < 37 || keyCode > 40) return
+
+    // prevent sudden movement in oposite direction
+    if (direction === DIRECTIONS[38] && keyCode === 40) return
+    if (direction === DIRECTIONS[40] && keyCode === 38) return
+    if (direction === DIRECTIONS[37] && keyCode === 39) return
+    if (direction === DIRECTIONS[39] && keyCode === 37) return
+
+    setDirection(DIRECTIONS[keyCode])
   }
 
   const createApple = (currentSnake) => {
     const placeAppleOnRandomBlock = () => {
       return apple.map((_, i) =>
-        Math.floor((Math.random() * LEVEL_SIZE[i]) / LEVEL_SCALE)
+        Math.floor(
+          (Math.random() * levelSettings.size[i]) / levelSettings.tileSize
+        )
       )
     }
 
@@ -63,9 +84,9 @@ const Game = () => {
 
   const hasCollidedWithWall = (block) => {
     return (
-      block[0] * LEVEL_SCALE >= LEVEL_SIZE[0] ||
+      block[0] * levelSettings.tileSize >= levelSettings.size[0] ||
       block[0] < 0 ||
-      block[1] * LEVEL_SCALE >= LEVEL_SIZE[1] ||
+      block[1] * levelSettings.tileSize >= levelSettings.size[1] ||
       block[1] < 0
     )
   }
@@ -110,10 +131,20 @@ const Game = () => {
   useInterval(() => run(), speed)
 
   return (
-    <div role="button" tabIndex="0" onKeyDown={changeSnakeDirection}>
+    <div
+      className="game-container"
+      tabIndex="0"
+      role="button"
+      onKeyDown={handleKeyPress}
+      style={{
+        width: `${levelSettings.size[0] + 20}px`,
+        height: `${levelSettings.size[1] + 20}px`,
+      }}
+    >
       <Level snake={snake} apple={apple} />
-      {gameOver && <div>GAME OVER!</div>}
-      <button onClick={startGame}>Start Game</button>
+      {!gameStarted && (
+        <div className="game-message">PRESS ANY KEY TO START!</div>
+      )}
     </div>
   )
 }

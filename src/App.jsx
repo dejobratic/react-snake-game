@@ -4,7 +4,7 @@ import Game from "components/Game"
 
 import { SettingsContextProvider } from "contexts/SettingsContext"
 
-import "App.css"
+import "App.scss"
 
 const App = () => {
   return (
