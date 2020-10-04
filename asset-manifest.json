@@ -1,24 +1,24 @@
 {
   "files": {
-    "main.css": "/my-app/react-snake-game/static/css/main.52f0e8c0.chunk.css",
-    "main.js": "/my-app/react-snake-game/static/js/main.453035f6.chunk.js",
-    "main.js.map": "/my-app/react-snake-game/static/js/main.453035f6.chunk.js.map",
-    "runtime-main.js": "/my-app/react-snake-game/static/js/runtime-main.81b923f2.js",
-    "runtime-main.js.map": "/my-app/react-snake-game/static/js/runtime-main.81b923f2.js.map",
-    "static/js/2.108c2f68.chunk.js": "/my-app/react-snake-game/static/js/2.108c2f68.chunk.js",
-    "static/js/2.108c2f68.chunk.js.map": "/my-app/react-snake-game/static/js/2.108c2f68.chunk.js.map",
-    "index.html": "/my-app/react-snake-game/index.html",
-    "precache-manifest.824baf29232b612ffc4b5cf63baa7f82.js": "/my-app/react-snake-game/precache-manifest.824baf29232b612ffc4b5cf63baa7f82.js",
-    "service-worker.js": "/my-app/react-snake-game/service-worker.js",
-    "static/css/main.52f0e8c0.chunk.css.map": "/my-app/react-snake-game/static/css/main.52f0e8c0.chunk.css.map",
-    "static/js/2.108c2f68.chunk.js.LICENSE.txt": "/my-app/react-snake-game/static/js/2.108c2f68.chunk.js.LICENSE.txt",
-    "static/media/App.scss": "/my-app/react-snake-game/static/media/level-background.e6c4427c.jpg",
-    "static/media/snake-graphics.png": "/my-app/react-snake-game/static/media/snake-graphics.f20532e3.png"
+    "main.css": "/react-snake-game/static/css/main.401121ca.chunk.css",
+    "main.js": "/react-snake-game/static/js/main.94d21743.chunk.js",
+    "main.js.map": "/react-snake-game/static/js/main.94d21743.chunk.js.map",
+    "runtime-main.js": "/react-snake-game/static/js/runtime-main.0f2d89e1.js",
+    "runtime-main.js.map": "/react-snake-game/static/js/runtime-main.0f2d89e1.js.map",
+    "static/js/2.108c2f68.chunk.js": "/react-snake-game/static/js/2.108c2f68.chunk.js",
+    "static/js/2.108c2f68.chunk.js.map": "/react-snake-game/static/js/2.108c2f68.chunk.js.map",
+    "index.html": "/react-snake-game/index.html",
+    "precache-manifest.25a2805c42f77eccd82fa1861bbafcf0.js": "/react-snake-game/precache-manifest.25a2805c42f77eccd82fa1861bbafcf0.js",
+    "service-worker.js": "/react-snake-game/service-worker.js",
+    "static/css/main.401121ca.chunk.css.map": "/react-snake-game/static/css/main.401121ca.chunk.css.map",
+    "static/js/2.108c2f68.chunk.js.LICENSE.txt": "/react-snake-game/static/js/2.108c2f68.chunk.js.LICENSE.txt",
+    "static/media/App.scss": "/react-snake-game/static/media/level-background.e6c4427c.jpg",
+    "static/media/snake-graphics.png": "/react-snake-game/static/media/snake-graphics.f20532e3.png"
   },
   "entrypoints": [
-    "static/js/runtime-main.81b923f2.js",
+    "static/js/runtime-main.0f2d89e1.js",
     "static/js/2.108c2f68.chunk.js",
-    "static/css/main.52f0e8c0.chunk.css",
-    "static/js/main.453035f6.chunk.js"
+    "static/css/main.401121ca.chunk.css",
+    "static/js/main.94d21743.chunk.js"
   ]
 }
